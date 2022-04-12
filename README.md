@@ -129,6 +129,62 @@ trace-cmd report
 In this mode of operation, the programs accept the linux version as an input from the user and using the NVD APIs it fetches all the CVEs for the given SOUP. 
 The program checks if the CVE is applicable to the given SOUP, or it was reported for the application running on the given SOUP. It discards such CVEs. From the description of the remaining CVEs the program extracts the function name and uses that data to compare against ftrace logs.The program also generates a summary of its finding.
 
+```python
+> python .\run.py
+Enter the mode of operation
+1. RAW
+2. CMD
+3. Linux-OS
+0. EXIT
+>> 3
+
+
+Report Analysis (Y/N):y
+Is trace-cmd report in /logs-ftrace (Y/N):y
+Vendor: linux
+SOUP: linux_kernel
+Enter the version: 4.4.0
+
+
+
+[+] No Of CVEs 1780
+[+] Retrieving CVEs From The NVD Database
+[+] Finished Retrieving
+
+
+[+] CVEs With Function  155
+[+] isTriggerd Functions 6
+[+] isNotTriggered Functions 149
+╒══════════════════╤════════════════════════════════╤═══════════════╕
+│ CVE              │ Vulnerable Function            │ isTriggered   │
+╞══════════════════╪════════════════════════════════╪═══════════════╡
+│ CVE-2022-0494    │ scsi_ioctl                     │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2021-4203    │ sock_getsockopt                │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2020-28097   │ vgacon_scrolldelta             │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2021-40490   │ ext4_write_inline_data_end     │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2021-4150    │ add_partition                  │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2021-4150    │ device_add                     │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2021-4148    │ block_invalidatepage           │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2022-0492    │ cgroup_release_agent_write     │ No            │
+├──────────────────┼────────────────────────────────┼───────────────┤
+│ CVE-2021-4083    │ fget                           │ Yes           │
+├──────────────────┼────────────────────────────────┼───────────────┤
+
+
+[+] Running On CVEs             820
+[+] Remaining CVEs              960
+    811 CVEs Require Analysis
+    149 CVEs Not Triggered
+--------------------------------------------------
+[+] Total CVEs                  1780
+```
 
 
 ## Contributing
